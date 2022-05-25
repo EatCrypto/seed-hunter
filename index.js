@@ -55,6 +55,7 @@ const run = async () => {
               );
             }
           });
+          chunks = [];
         }
       }
     } catch (err) {
