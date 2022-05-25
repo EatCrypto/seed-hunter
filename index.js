@@ -29,8 +29,6 @@ const run = async () => {
             address: wallet.address,
           });
         } else {
-          console.log(chunks[0].address);
-          console.log(chunks[chunks.length - 1].address);
           const request = chunks.map((chunk) => ({
             target: "0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696",
             callData: MULTICALL.interface.encodeFunctionData("getEthBalance", [
@@ -51,6 +49,7 @@ const run = async () => {
             );
 
             if (balance > 0) {
+              console.log(chunks[index].mnemonic);
               fs.writeFileSync(
                 `./data/${chunks[index].address}`,
                 JSON.stringify(chunks[index])
