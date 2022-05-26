@@ -1,7 +1,7 @@
 const { Wallet, utils, providers, Contract } = require("ethers");
 const { shuffle } = require("lodash");
 const fs = require("fs");
-const words = require("./words.json");
+const WORDS = require("./words.json");
 const multicallArtifact = require("./abi/multicall.json");
 const { formatEther } = require("ethers/lib/utils");
 
@@ -16,10 +16,12 @@ const MULTICALL = new Contract(
 
 const run = async () => {
   let chunks = [];
+  let words = WORDS;
 
   while (true) {
     try {
-      const mnemonic = shuffle(words).slice(0, 12).join(" ");
+      words = shuffle(words);
+      const mnemonic = words.slice(0, 12).join(" ");
       if (utils.isValidMnemonic(mnemonic)) {
         const wallet = Wallet.fromMnemonic(mnemonic);
 
